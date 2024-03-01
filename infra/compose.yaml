@@ -1,0 +1,14 @@
+services:
+  database:
+    image: "postgres:16.0-alpine3.18"
+    # fazer o compose.yaml ler o .env para obter as variaveis de ambiente para iniciar o serviço do DB
+    env_file:
+      # lista para arquivos de variaveis de ambiente
+      - ../.env.development
+    # aqui vai as configurações da onde esse serviço esta vindo, é vai vir de uma Imagem Docker oficial publica do docker hub
+    #environment:
+    # essa chave acima vai se responsabilizar por passar valores para o ambiente la dentro do container, vai passas as variaveis de ambiente que o container pede
+      #POSTGRES_PASSWORD: "local_password"
+    ports:
+      # - lista de relação entre porta externa/interna, porta no ambiente host(mundo de fora do container) é a porta no guest mundo dentro do container
+      - "5432:5432"
