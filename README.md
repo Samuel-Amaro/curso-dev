@@ -2,6 +2,21 @@
 
 Projeto do curso de programação da plataforma https://curso.dev
 
+## Construído Com
+
+- HTML
+- Web Acessibility(wai-arias, role)
+- CSS (Flexbox, Grid, Normalize)
+- Mobile-first workflow
+- RWD(Responsive Web Design)
+- TypeScript
+- [Svelte](https://svelte.dev/docs/introduction)
+- [SvelteKit](https://kit.svelte.dev/docs/introduction)
+- [node](https://nodejs.org/en)
+- [PostgreSQL](https://www.postgresql.org/)
+- [node-postgres](https://node-postgres.com/)
+- [Docker](https://docs.docker.com/compose/)
+
 ## Desenvolvimento Projeto SvelteKit
 
 Depois de criar um projeto e instalar dependências com `npm install` (ou `pnpm install` ou `yarn`), inicie um servidor de desenvolvimento:
