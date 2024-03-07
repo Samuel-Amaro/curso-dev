@@ -16,6 +16,7 @@ Projeto do curso de programação da plataforma https://curso.dev
 - [PostgreSQL](https://www.postgresql.org/)
 - [node-postgres](https://node-postgres.com/)
 - [Docker](https://docs.docker.com/compose/)
+- [Vitest](https://vitest.dev/guide/) - Tests Units
 
 ## Desenvolvimento Projeto SvelteKit
 
