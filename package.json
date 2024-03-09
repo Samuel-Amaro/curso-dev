@@ -14,7 +14,9 @@
 		"test": "vitest",
 		"test:watch": "vitest watch",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"migration:create": "node-pg-migrate --migrations-dir infra/db/migrations --tsconfig ./infra/db/tsconfig.migrations.json --migration-file-language ts --envPath .env.development --template-file-name ./infra/db/template.ts create",
+		"migration:up": "node-pg-migrate --migrations-dir infra/db/migrations --tsconfig ./infra/db/tsconfig.migrations.json --migration-file-language ts --envPath .env.development --template-file-name ./infra/db/template.ts up"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
@@ -38,6 +40,9 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"pg": "^8.11.3"
+		"dotenv": "^16.4.4",
+		"node-pg-migrate": "^6.2.2",
+		"pg": "^8.11.3",
+		"ts-node": "^10.9.2"
 	}
 }
