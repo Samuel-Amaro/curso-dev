@@ -1,5 +1,5 @@
 import { json } from "@sveltejs/kit";
-import database from "../../../../../infra/database"
+import database from "$lib/server/database"
 import { env } from "$env/dynamic/private";
 
 /**
@@ -12,7 +12,7 @@ export async function GET() {
   const max_connections = await database.query("SHOW max_connections");
   const opened_connections = await database.query({
     text: "SELECT COUNT(*)::int AS oppened_connections FROM pg_stat_activity WHERE datname = $1;",
-    values: [env.POSTGRES_DB]
+    values: [import.meta.env.POSTGRES_DB]
   })
   return json({
     updated_at: updateAt,
