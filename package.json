@@ -11,12 +11,12 @@
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"test": "vitest",
-		"test:watch": "vitest watch",
+		"test": "vitest --no-file-parallelism",
+		"test:watch": "vitest watch --no-file-parallelism",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
-		"migration:create": "node-pg-migrate --migrations-dir infra/db/migrations --tsconfig ./infra/db/tsconfig.migrations.json --migration-file-language ts --envPath .env.development --template-file-name ./infra/db/template.ts create",
-		"migration:up": "node-pg-migrate --migrations-dir infra/db/migrations --tsconfig ./infra/db/tsconfig.migrations.json --migration-file-language ts --envPath .env.development --template-file-name ./infra/db/template.ts up"
+		"migration:create": "node-pg-migrate --migrations-dir infra/migrations --envPath .env.development create",
+		"migration:up": "node-pg-migrate --migrations-dir infra/migrations --envPath .env.development up"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
@@ -41,6 +41,7 @@
 	"type": "module",
 	"dependencies": {
 		"dotenv": "^16.4.4",
+		"dotenv-expand": "11.0.6",
 		"node-pg-migrate": "^6.2.2",
 		"pg": "^8.11.3",
 		"ts-node": "^10.9.2"

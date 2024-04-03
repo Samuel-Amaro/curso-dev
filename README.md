@@ -15,8 +15,10 @@ Projeto do curso de programação da plataforma https://curso.dev
 - [node](https://nodejs.org/en)
 - [PostgreSQL](https://www.postgresql.org/)
 - [node-postgres](https://node-postgres.com/)
+- [node-pg-migrate](https://salsita.github.io/node-pg-migrate/#/)
 - [Docker](https://docs.docker.com/compose/)
-- [Vitest](https://vitest.dev/guide/) - Tests Units
+- [Vitest](https://vitest.dev/guide/) - Tests
+- [Vite](https://vitejs.dev/) - Tooling Front-End
 
 ## Desenvolvimento Projeto SvelteKit
 
@@ -113,4 +115,29 @@ Olhar status de container docker
 ```bash
 docker ps # or
 docker ps --all
+```
+
+---
+
+Executar os testes
+
+```bash
+npm run test:watch #or
+npm run test
+```
+
+---
+
+Criar migration
+
+```bash
+npm run migration:create
+```
+
+---
+
+Ler e executar migrations
+
+```bash
+npm run migration:up
 ```
