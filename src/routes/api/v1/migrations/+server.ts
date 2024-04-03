@@ -1,36 +1,39 @@
-import { json } from "@sveltejs/kit";
-import migrate  from "node-pg-migrate"
-import { env } from "$env/dynamic/private";
-import {join} from "node:path"
+import { json, type RequestHandler } from '@sveltejs/kit';
+import migrate from 'node-pg-migrate';
+import { join } from 'node:path';
+import database from '$lib/server/database';
+
+const defaultMigrationOptions = {
+	dryRun: true,
+	migrationsTable: 'pgmigrations',
+	dir: join('infra', 'migrations'),
+	direction: 'up',
+	verbose: true
+};
 
 /**
- * Ira executar as migrations no modo Dry Run
- * @returns 
+ * Ira Ler as migrations pendentes e executar no modo Dry Run
+ * @returns
  */
-export async function GET() {
-  //@ts-ignore
-  const runner = migrate['default']
-  const migrations = await runner({
-    databaseUrl: import.meta.env.DATABASE_URL as string,
-    dryRun: true,
-    migrationsTable: "pgmigrations",
-    dir: join("infra", "migrations"),
-    direction: "up",
-    verbose: true,
-  })
-  return json(migrations)
-}
+export const GET: RequestHandler = async () => {
+	const dbClient = await database.getNewClient()
+	//@ts-ignore
+	const runner = migrate['default'];
+	const pendingMigrations = await runner({...defaultMigrationOptions, dbClient});
+	await dbClient.end()
+	return json(pendingMigrations);
+};
 
-export async function POST() {
-  //@ts-ignore
-  const runner = migrate['default']
-  const migrations = await runner({
-    databaseUrl: import.meta.env.DATABASE_URL as string,
-    dryRun: false,
-    migrationsTable: "pgmigrations",
-    dir: join("infra", "migrations"),
-    direction: "up",
-    verbose: true,
-  })
-  return json(migrations)
-}
+/**
+ * Ira Ler as migrations migradas(já executas) no Modo Live Run
+ * @returns
+ */
+export const POST: RequestHandler = async () => {
+	const dbClient = await database.getNewClient()
+	//@ts-ignore
+	const runner = migrate['default'];
+	const migratedMigrations = await runner({ ...defaultMigrationOptions, dryRun: false, dbClient});
+	await dbClient.end()
+	if (migratedMigrations.length > 0) return json(migratedMigrations, { status: 201 });
+	return json(migratedMigrations);
+};
