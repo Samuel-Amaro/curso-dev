@@ -1,6 +1,5 @@
 import { json } from '@sveltejs/kit';
 import database from '$lib/server/database';
-import { env } from '$env/dynamic/private';
 
 /**
  * Ira devolver informações sobre a saude do nosso sistema
