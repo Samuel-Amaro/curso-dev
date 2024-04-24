@@ -9,7 +9,7 @@ async function cleanDatabase() {
 beforeAll(cleanDatabase);
 
 describe('DELETE /api/v1/migrations', () => {
-  it('testa retorno 404 para DELETE /api/v1/migrations', async () => {
+  it('testa retorno 405 para DELETE /api/v1/migrations', async () => {
     const response = await fetch('http://localhost:5173/api/v1/migrations', {
       method: 'DELETE'
     });
