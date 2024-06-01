@@ -1,5 +1,6 @@
 services:
   database:
+    container_name: "postgres-dev"
     image: 'postgres:16.0-alpine3.18'
     # fazer o compose.yaml ler o .env para obter as variaveis de ambiente para iniciar o serviço do DB
     env_file:
