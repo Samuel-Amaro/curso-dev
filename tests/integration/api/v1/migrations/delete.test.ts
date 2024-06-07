@@ -1,12 +1,12 @@
 import { it, expect, beforeAll, describe } from 'vitest';
 import database from '../../../../../src/lib/server/database';
 import type { TypeAPIStatus } from '../../../../../src/types/apis';
+import orchestrator from '../../../../orchestrator';
 
-async function cleanDatabase() {
-	await database.query('drop schema public cascade; create schema public;');
-}
-
-beforeAll(cleanDatabase);
+beforeAll(async () => {
+  await orchestrator.waitForAllServices();
+  await database.query('drop schema public cascade; create schema public;');
+})
 
 describe('DELETE /api/v1/migrations', () => {
   it('testa retorno 405 para DELETE /api/v1/migrations', async () => {
