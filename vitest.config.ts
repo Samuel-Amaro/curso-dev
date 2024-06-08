@@ -7,6 +7,6 @@ dotenv.config({ path: '.env.development' });
 export default defineConfig({
 	test: {
 		env: loadEnv('', process.cwd(), ''),
-    testTimeout: 60000
+		testTimeout: 60000
 	}
 });

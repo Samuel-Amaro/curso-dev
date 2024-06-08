@@ -3,8 +3,8 @@ import type { TypeAPIStatus } from '../../../../../src/types/apis';
 import orchestrator from '../../../../orchestrator';
 
 beforeAll(async () => {
-  await orchestrator.waitForAllServices();
-})
+	await orchestrator.waitForAllServices();
+});
 
 it('testa retorno 200 para GET /api/v1/status', async () => {
 	const response = await fetch('http://localhost:5173/api/v1/status');

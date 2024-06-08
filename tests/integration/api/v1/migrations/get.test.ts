@@ -3,9 +3,9 @@ import database from '../../../../../src/lib/server/database';
 import orchestrator from '../../../../orchestrator';
 
 beforeAll(async () => {
-  await orchestrator.waitForAllServices();
-  await database.query('drop schema public cascade; create schema public;');
-})
+	await orchestrator.waitForAllServices();
+	await database.query('drop schema public cascade; create schema public;');
+});
 
 it('testa retorno 200 para GET /api/v1/migrations', async () => {
 	const response = await fetch('http://localhost:5173/api/v1/migrations');

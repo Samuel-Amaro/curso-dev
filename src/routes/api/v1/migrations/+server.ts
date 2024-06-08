@@ -19,17 +19,16 @@ const defaultMigrationOptions = {
 export const GET: RequestHandler = async () => {
 	let dbClient: Client | null = null;
 	try {
-		dbClient = await database.getNewClient()
+		dbClient = await database.getNewClient();
 		//@ts-ignore
 		const runner = migrate['default'];
-		const pendingMigrations = await runner({...defaultMigrationOptions, dbClient});
+		const pendingMigrations = await runner({ ...defaultMigrationOptions, dbClient });
 		return json(pendingMigrations);
 	} catch (error) {
-		console.error(error)
+		console.error(error);
 		throw error;
-	}finally{
-		if(dbClient)
-			await dbClient.end()
+	} finally {
+		if (dbClient) await dbClient.end();
 	}
 };
 
@@ -38,20 +37,22 @@ export const GET: RequestHandler = async () => {
  * @returns
  */
 export const POST: RequestHandler = async () => {
-	let dbClient: Client | null = null
+	let dbClient: Client | null = null;
 	try {
-		dbClient = await database.getNewClient()
+		dbClient = await database.getNewClient();
 		//@ts-ignore
 		const runner = migrate['default'];
-		const migratedMigrations = await runner({ ...defaultMigrationOptions, dryRun: false, dbClient});
+		const migratedMigrations = await runner({
+			...defaultMigrationOptions,
+			dryRun: false,
+			dbClient
+		});
 		if (migratedMigrations.length > 0) return json(migratedMigrations, { status: 201 });
 		return json(migratedMigrations);
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 		throw error;
-	}finally {
-		if(dbClient)
-			await dbClient.end()
+	} finally {
+		if (dbClient) await dbClient.end();
 	}
-	
 };

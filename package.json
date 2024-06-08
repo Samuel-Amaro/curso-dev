@@ -11,7 +11,7 @@
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"test": "npm run services:up && npm run wait-for-postgres && concurrently -n vite,vitest -k -s command-vitest 'vite dev' 'vitest --no-file-parallelism'",
+		"test": "npm run services:up && concurrently -n vite,vitest -k -s command-vitest \"vite dev\" \"vitest --no-file-parallelism\"",
 		"test:watch": "vitest watch --no-file-parallelism",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
