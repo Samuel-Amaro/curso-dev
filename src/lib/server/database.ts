@@ -23,8 +23,8 @@ async function getNewClient() {
 		ssl: import.meta.env.MODE === 'production' ? true : false
 	});
 
-	await client.connect()
-	return client
+	await client.connect();
+	return client;
 }
 
 export default {
