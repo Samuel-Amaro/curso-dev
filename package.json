@@ -17,7 +17,9 @@
 		"format": "prettier --write .",
 		"migration:create": "node-pg-migrate --migrations-dir infra/migrations --envPath .env.development create",
 		"migration:up": "node-pg-migrate --migrations-dir infra/migrations --envPath .env.development up",
-		"wait-for-postgres": "node infra/scripts/wait-for-postgres.js"
+		"wait-for-postgres": "node infra/scripts/wait-for-postgres.js",
+		"lint:prettier:check": "prettier --check .",
+		"lint:prettier:fix": "prettier --write ."
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
