@@ -1,5 +1,6 @@
 import pg from 'pg';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function query(queryObject: any) {
 	const client = await getNewClient();
 	try {

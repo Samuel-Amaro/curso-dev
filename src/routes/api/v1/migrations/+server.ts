@@ -20,7 +20,7 @@ export const GET: RequestHandler = async () => {
 	let dbClient: Client | null = null;
 	try {
 		dbClient = await database.getNewClient();
-		//@ts-ignore
+		//@ts-expect-error error-migrates-dry-run
 		const runner = migrate['default'];
 		const pendingMigrations = await runner({ ...defaultMigrationOptions, dbClient });
 		return json(pendingMigrations);
@@ -40,7 +40,7 @@ export const POST: RequestHandler = async () => {
 	let dbClient: Client | null = null;
 	try {
 		dbClient = await database.getNewClient();
-		//@ts-ignore
+		//@ts-expect-error error-migrate-live-run
 		const runner = migrate['default'];
 		const migratedMigrations = await runner({
 			...defaultMigrationOptions,
