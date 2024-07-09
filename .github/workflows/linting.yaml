@@ -19,4 +19,19 @@ jobs:
 
       - run: npm ci # rodar(executar) um comando dentro do SO, npm ci(vai usar estritamente as dependencias declaradas dentro do package-lock.json)
 
-      - run: npm run lint:prettier:check
+      - name: Check code quality with ESLint
+        run: npm run lint:eslint:check
+  eslint:
+    name: Eslint #name do job
+    runs-on: ubuntu-latest # define o SO que vai rodar os comandos
+    steps: #comandos que vão rodar no SO
+      - uses: actions/checkout@v4 # puxa o codigo de dev para dentro do SO que esta zero, usando as proprias extensões de actions do GitHub Actions
+
+      - uses: actions/setup-node@v4 # ajuda a configuração do NODE dentro do SO
+        with:
+          node-version: 'lts/hydrogen'
+
+      - run: npm ci # rodar(executar) um comando dentro do SO, npm ci(vai usar estritamente as dependencias declaradas dentro do package-lock.json)
+
+      - name: Check code quality with ESLint
+        run: npm run lint:eslint:check
