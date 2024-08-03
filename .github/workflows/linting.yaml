@@ -19,8 +19,8 @@ jobs:
 
       - run: npm ci # rodar(executar) um comando dentro do SO, npm ci(vai usar estritamente as dependencias declaradas dentro do package-lock.json)
 
-      - name: Check code quality with ESLint
-        run: npm run lint:eslint:check
+      - name: Check format with Prettier
+        run: npm run lint:prettier:check
   eslint:
     name: Eslint #name do job
     runs-on: ubuntu-latest # define o SO que vai rodar os comandos
@@ -35,3 +35,32 @@ jobs:
 
       - name: Check code quality with ESLint
         run: npm run lint:eslint:check
+  svelte:
+    name: svelte
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/hydrogen'
+
+      - run: npm ci
+
+      - name: Check code quality with Svelte
+        run: npm run check
+  commitlint:
+    name: commitlint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/hydrogen'
+
+      - run: npm ci
+
+      - run: npx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
