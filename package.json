@@ -23,11 +23,13 @@
 		"lint:eslint:check": "eslint .",
 		"lint:eslint:fix": "eslint --fix .",
 		"prepare": "husky",
-		"commit": "cz"
+		"commit": "cz",
+		"secretlint": "npx secretlint \"**/*\""
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.3.0",
 		"@commitlint/config-conventional": "^19.2.2",
+		"@secretlint/secretlint-rule-preset-recommend": "^8.2.4",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
@@ -44,8 +46,10 @@
 		"eslint-plugin-svelte": "^2.35.1",
 		"eslint-plugin-vitest": "^0.5.4",
 		"husky": "^9.1.4",
+		"lint-staged": "^15.2.8",
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
+		"secretlint": "^8.2.4",
 		"svelte": "^4.2.7",
 		"svelte-check": "^3.6.0",
 		"tslib": "^2.4.1",
@@ -66,5 +70,16 @@
 		"commitizen": {
 			"path": "./node_modules/cz-conventional-changelog"
 		}
+	},
+	"lint-staged": {
+		"*.{js,ts}": [
+			"eslint --fix",
+			"prettier --write"
+		],
+		"*.{json,css,scss,md, html}": [
+			"prettier --write"
+		],
+		".css": "stylehint",
+		".svelte": "npm run check"
 	}
 }
